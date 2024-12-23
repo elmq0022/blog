@@ -11,7 +11,10 @@ class ArticleDetailView(DetailView):
 class ArticleListView(ListView):
     model = Article
     template_name = "blog/index.html"
-    paginate_by = 5
+    paginate_by = 2
+    ordering = "-published_date"
+    queryset = Article.objects.filter(is_published=True)
+
 
 
 class AboutView(TemplateView):
