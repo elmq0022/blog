@@ -1,4 +1,4 @@
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, TemplateView
 
 from apps.blog.models import Article
 
@@ -12,3 +12,7 @@ class ArticleListView(ListView):
     model = Article
     template_name = "blog/index.html"
     paginate_by = 5
+
+
+class AboutView(TemplateView):
+    template_name = "blog/about.html"
