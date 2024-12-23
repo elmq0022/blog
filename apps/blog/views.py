@@ -2,10 +2,13 @@ from django.views.generic import DetailView, ListView
 
 from apps.blog.models import Article
 
+
 class ArticleDetailView(DetailView):
     model = Article
+    template_name = "blog/post.html"
 
 
 class ArticleListView(ListView):
     model = Article
-    paginate_by = 20
+    template_name = "blog/index.html"
+    paginate_by = 5
