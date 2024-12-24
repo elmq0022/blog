@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Third Party Apps
+    "crispy_bootstrap5",
+    "crispy_forms",
+    'django_recaptcha',
     'tinymce',
     # Project Apps
     'apps.blog',
@@ -126,5 +130,32 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+###
+# TINYMCE
+###
 TINYMCE_SPELLCHECKER = True
 TINYMCE_COMPRESSOR = False
+
+###
+# CRISPY FORMS
+###
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+###
+# SENDGRID
+###
+EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND", "django.core.mail.backends.smtp.EmailBackend")
+EMAIL_HOST = os.environ.get("EMAIL_HOST", "smtp.sendgrid.net")
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", os.environ.get("SENDGRID_USERNAME", None))
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", os.environ.get("SENDGRID_PASSWORD", None))
+EMAIL_PORT = int(os.environ.get("EMAIL_PORT", 587))
+EMAIL_USE_TLS = bool(os.environ.get("EMAIL_USE_TLS", True))
+
+###
+# RECAPTCHA
+# default keys are google's test keys
+###
+RECAPTCHA_PUBLIC_KEY = os.environ.get("", "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI")
+RECAPTCHA_PRIVATE_KEY = os.environ.get("", "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe")
+SILENCED_SYSTEM_CHECKS = ['django_recaptcha.recaptcha_test_key_error'] if DEBUG == True else []
