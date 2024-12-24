@@ -133,6 +133,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ###
 # TINYMCE
 ###
+TINYMCE_DEFAULT_CONFIG = {
+    "plugins": "image,codesample",
+    "toolbar": "image,codesample",
+}
 TINYMCE_SPELLCHECKER = True
 TINYMCE_COMPRESSOR = False
 
