@@ -10797,6 +10797,7 @@ header.masthead .post-heading .meta a {
   }
 }
 
+ /* turns off the asterisk django-crispy-forms adds to required fields */
 .asteriskField {
     display: none;
 }
