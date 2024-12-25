@@ -30,6 +30,10 @@ def strtobool(value: str | bool) -> bool:
 BASE_DIR = Path(__file__).resolve().parent.parent
 SQLITE_DB = str((BASE_DIR / 'db.sqlite3').absolute())
 
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_URL = "/static/"
+MEDIA_URL = "/media/"
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -129,8 +133,6 @@ USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
