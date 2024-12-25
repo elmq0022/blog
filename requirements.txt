@@ -38,3 +38,5 @@ typing-extensions==4.12.2
     # via
     #   dj-database-url
     #   psycopg
+whitenoise==6.8.2
+    # via ace_blog (pyproject.toml)

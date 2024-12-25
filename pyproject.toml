@@ -25,6 +25,7 @@ dependencies = [
     "django-tinymce",
     "gunicorn",
     "psycopg",
+    "whitenoise",
 ]
 
 [tool.hatch.build.targets.wheel]
