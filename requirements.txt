@@ -26,6 +26,10 @@ django-recaptcha==4.0.0
     # via ace_blog (pyproject.toml)
 django-tinymce==4.1.0
     # via ace_blog (pyproject.toml)
+gunicorn==23.0.0
+    # via ace_blog (pyproject.toml)
+packaging==24.2
+    # via gunicorn
 psycopg==3.2.3
     # via ace_blog (pyproject.toml)
 sqlparse==0.5.3
