@@ -23,6 +23,7 @@ dependencies = [
     "django-crispy-forms",
     "django-recaptcha",
     "django-tinymce",
+    "psycopg",
 ]
 
 [tool.hatch.build.targets.wheel]

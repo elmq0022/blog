@@ -26,7 +26,11 @@ django-recaptcha==4.0.0
     # via ace_blog (pyproject.toml)
 django-tinymce==4.1.0
     # via ace_blog (pyproject.toml)
+psycopg==3.2.3
+    # via ace_blog (pyproject.toml)
 sqlparse==0.5.3
     # via django
 typing-extensions==4.12.2
-    # via dj-database-url
+    # via
+    #   dj-database-url
+    #   psycopg
