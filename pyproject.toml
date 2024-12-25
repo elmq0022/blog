@@ -1,0 +1,35 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ace_blog"
+version = "0.0.1"
+description = "My Personal Website"
+objects.license = { text = "MIT License" }
+requires-python = ">=3.12"
+authors = [
+    { name = "Aaron Elmquist", email = "chicago-organizers@python.org" },
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "crispy-bootstrap5",
+    "dj-database-url",
+    "django",
+    "django-crispy-forms",
+    "django-recaptcha",
+    "django-tinymce",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "ace_blog",
+]
+exclude = [
+    "*.pxi",
+    "*.pyx",
+]

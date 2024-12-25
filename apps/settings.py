@@ -10,24 +10,36 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
+
+import dj_database_url
+
+
+def strtobool(value: str | bool) -> bool:
+    if isinstance(value, bool):
+        return value
+
+    if value.lower() in ["t", "true", "1"]:
+        return True
+
+    return False
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+SQLITE_DB = str((BASE_DIR / 'db.sqlite3').absolute())
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=0gst^hma!7fas#paq$b@)=h0rf--tn_+joc+xzf&7&1mbm8i4'
+SECRET_KEY = os.environ.get("SECRET_KEY", 'django-insecure-=0gst^hma!7fas#paq$b@)=h0rf--tn_+joc+xzf&7&1mbm8i4')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = strtobool(os.environ.get("DEBUG", True))
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["ace-blog-723ec9e465ee.herokuapp.com"] + ["localhost", "127.0.0.1"] if DEBUG else []
 
 # Application definition
 
@@ -77,17 +89,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'apps.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+# default is for local production provide DATABASE_URL environment variable for production setting
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default="sqlite:///" + SQLITE_DB
+    )
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -107,18 +116,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Chicago'
 
 USE_I18N = True
 
-USE_TZ = True
-
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
@@ -154,12 +161,12 @@ EMAIL_HOST = os.environ.get("EMAIL_HOST", "smtp.sendgrid.net")
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", os.environ.get("SENDGRID_USERNAME", None))
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", os.environ.get("SENDGRID_PASSWORD", None))
 EMAIL_PORT = int(os.environ.get("EMAIL_PORT", 587))
-EMAIL_USE_TLS = bool(os.environ.get("EMAIL_USE_TLS", True))
+EMAIL_USE_TLS = strtobool(os.environ.get("EMAIL_USE_TLS", True))
 
 ###
 # RECAPTCHA
 # default keys are google's test keys
 ###
-RECAPTCHA_PUBLIC_KEY = os.environ.get("", "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI")
-RECAPTCHA_PRIVATE_KEY = os.environ.get("", "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe")
+RECAPTCHA_PUBLIC_KEY = os.environ.get("RECAPTCHA_PUBLIC_KEY", "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI")
+RECAPTCHA_PRIVATE_KEY = os.environ.get("RECAPTCHA_PRIVATE_KEY", "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe")
 SILENCED_SYSTEM_CHECKS = ['django_recaptcha.recaptcha_test_key_error'] if DEBUG == True else []
