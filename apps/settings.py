@@ -30,15 +30,23 @@ def strtobool(value: str | bool) -> bool:
 BASE_DIR = Path(__file__).resolve().parent.parent
 SQLITE_DB = str((BASE_DIR / 'db.sqlite3').absolute())
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
-STATIC_URL = "/static/"
-MEDIA_URL = "/media/"
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = 'elmquist-dev-bucket'
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+AWS_S3_REGION_NAME = "us-east-2"
+AWS_S3_SIGNATURE_VERSION = "s3v4"
+AWS_QUERYSTRING_EXPIRE = 604800
+CLOUDFRONT_DOMAIN = 'd1goydk762mxfm.cloudfront.net'
+
+# STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_LOCATION = "staticfiles"
+STATIC_URL = f"{CLOUDFRONT_DOMAIN}/static/"
+MEDIA_URL = f"{CLOUDFRONT_DOMAIN}/media/"
 
 STORAGES = {
-    # Enable WhiteNoise's GZip and Brotli compression of static assets:
-    # https://whitenoise.readthedocs.io/en/latest/django.html#add-compression-and-caching-support
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "apps.storages_backends.StaticStorage",
     },
 }
 

@@ -6,6 +6,12 @@
 #
 asgiref==3.8.1
     # via django
+boto3==1.35.87
+    # via ace_blog (pyproject.toml)
+botocore==1.35.87
+    # via
+    #   boto3
+    #   s3transfer
 crispy-bootstrap5==2024.10
     # via ace_blog (pyproject.toml)
 dj-database-url==2.3.0
@@ -17,6 +23,7 @@ django==5.1.4
     #   dj-database-url
     #   django-crispy-forms
     #   django-recaptcha
+    #   django-storages
     #   django-tinymce
 django-crispy-forms==2.3
     # via
@@ -24,19 +31,33 @@ django-crispy-forms==2.3
     #   crispy-bootstrap5
 django-recaptcha==4.0.0
     # via ace_blog (pyproject.toml)
+django-storages==1.14.4
+    # via ace_blog (pyproject.toml)
 django-tinymce==4.1.0
     # via ace_blog (pyproject.toml)
 gunicorn==23.0.0
     # via ace_blog (pyproject.toml)
+jmespath==1.0.1
+    # via
+    #   boto3
+    #   botocore
 packaging==24.2
     # via gunicorn
 psycopg==3.2.3
     # via ace_blog (pyproject.toml)
+python-dateutil==2.9.0.post0
+    # via botocore
+s3transfer==0.10.4
+    # via boto3
+six==1.17.0
+    # via python-dateutil
 sqlparse==0.5.3
     # via django
 typing-extensions==4.12.2
     # via
     #   dj-database-url
     #   psycopg
+urllib3==2.3.0
+    # via botocore
 whitenoise==6.8.2
     # via ace_blog (pyproject.toml)

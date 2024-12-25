@@ -17,11 +17,13 @@ classifiers = [
 ]
 
 dependencies = [
+    "boto3",
     "crispy-bootstrap5",
     "dj-database-url",
     "django",
     "django-crispy-forms",
     "django-recaptcha",
+    "django-storages",
     "django-tinymce",
     "gunicorn",
     "psycopg",
