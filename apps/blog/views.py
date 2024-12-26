@@ -29,7 +29,7 @@ class ContactView(FormView):
 
     def form_valid(self, form:ContactForm):
         try:
-            form.send_email()
+            form.mail()
             messages.success(self.request, "Your message was sent successfully")
         except Exception:
             messages.error(self.request, "Unable to send your message")

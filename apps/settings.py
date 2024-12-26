@@ -183,6 +183,9 @@ EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", os.environ.get("SEND
 EMAIL_PORT = int(os.environ.get("EMAIL_PORT", 587))
 EMAIL_USE_TLS = strtobool(os.environ.get("EMAIL_USE_TLS", True))
 
+
+ENVELOPE_EMAIL_RECIPIENTS = [email.split() for email in os.environ.get("ENVELOPE_EMAIL_RECIPIENTS", ",").split(",")]
+
 ###
 # RECAPTCHA
 # default keys are google's test keys

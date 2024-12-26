@@ -4,6 +4,7 @@ from django import forms
 from django.conf import settings
 from django_recaptcha.fields import ReCaptchaField
 from django_recaptcha.widgets import ReCaptchaV2Checkbox
+from django.core.mail import send_mail
 
 class ContactForm(forms.Form):
     def __init__(self, *args, **kwargs):
@@ -29,20 +30,10 @@ class ContactForm(forms.Form):
         Field('captcha', style="border: none; padding: 0px"),
     )
 
-    def send_email(self):
-        self._send_email(
-            recipients=getattr(settings, "ENVELOPE_EMAIL_RECIPIENTS", []),
+    def mail(self):
+        send_mail(
             subject=self.cleaned_data["subject"],
-            body=self.cleaned_data["message"],
-            reply_to=[self.cleaned_data["email"]],
+            message=self.cleaned_data["message"],
             from_email=self.cleaned_data["email"],
-        )
-
-    def _send_email(self, recipients, subject, body, reply_to, from_email):
-        print(
-            recipients,
-            subject,
-            body,
-            reply_to,
-            from_email
+            recipient_list=getattr(settings, "ENVELOPE_EMAIL_RECIPIENTS", [])
         )
