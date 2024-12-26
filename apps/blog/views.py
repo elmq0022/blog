@@ -33,9 +33,10 @@ class ContactView(FormView):
     def form_valid(self, form:ContactForm):
         try:
             logging.info("the form is valid, call form.mail()")
-            logging.info("%s", form)
             form.mail()
+            logging.info("successfully called form.mail()")
             messages.success(self.request, "Your message was sent successfully")
         except Exception:
+            logging.exception("couldn't do it boss")
             messages.error(self.request, "Unable to send your message")
         return super().form_valid(form)
