@@ -6,7 +6,7 @@ from apps.blog.models import Article
 from apps.blog.forms import ContactForm
 
 import logging
-logger = logging.getLogger(__file__)
+logger = logging.getLogger("django")
 
 class ArticleDetailView(DetailView):
     model = Article
@@ -28,7 +28,7 @@ class AboutView(TemplateView):
 class ContactView(FormView):
     template_name = "blog/contact.html"
     form_class = ContactForm
-    success_url = "/"
+    success_url = "/contact"
 
     def form_valid(self, form:ContactForm):
         try:

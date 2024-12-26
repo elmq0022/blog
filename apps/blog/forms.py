@@ -10,7 +10,7 @@ from django_recaptcha.widgets import ReCaptchaV2Checkbox
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
-log = logging.getLogger(__file__)
+logger = logging.getLogger("django")
 
 
 def sendgrid_mail(from_email, to_emails, subject, html_content):
@@ -23,11 +23,11 @@ def sendgrid_mail(from_email, to_emails, subject, html_content):
     try:
         sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
         response = sg.send(message)
-        log.info("Sendgrid response status: %s", response.status_code)
-        log.info("SendGrid response body: %s", response.body)
-        log.info("SendGrid response headers: %s", response.headers)
+        logger.info("Sendgrid response status: %s", response.status_code)
+        logger.info("SendGrid response body: %s", response.body)
+        logger.info("SendGrid response headers: %s", response.headers)
     except Exception:
-        log.error("email was NOT sent")
+        logger.exception("email was NOT sent")
 
 
 class ContactForm(forms.Form):
@@ -55,8 +55,8 @@ class ContactForm(forms.Form):
     )
 
     def mail(self):
-        log.info("sending email via SendGrid")
-        log.info("form data %s", self.cleaned_data)
+        logger.info("sending email via SendGrid")
+        logger.info("form data %s", self.cleaned_data)
         sendgrid_mail(
             from_email=self.cleaned_data["email"],
             to_emails=getattr(settings, "ENVELOPE_EMAIL_RECIPIENTS", []),
