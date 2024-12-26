@@ -13,13 +13,14 @@ from sendgrid.helpers.mail import Mail
 logger = logging.getLogger("django")
 
 
-def sendgrid_mail(from_email, to_emails, subject, html_content):
+def sendgrid_mail(from_email, to_emails, reply_to, subject, html_content):
     message = Mail(
         from_email=from_email,
         to_emails=to_emails,
         subject=subject,
         html_content=html_content
     )
+    message.reply_to = reply_to
     try:
         sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
         response = sg.send(message)
@@ -58,8 +59,9 @@ class ContactForm(forms.Form):
         logging.info("sending email via SendGrid")
         logging.info("form data %s", self.cleaned_data)
         sendgrid_mail(
-            from_email=self.cleaned_data["email"],
-            to_emails=os.environ.get("ENVELOPE_EMAIL_RECIPIENTS"),
+            from_email=os.environ.get("FROM_EMAIL"),
+            to_emails=os.environ.get("TO_EMAIL"),
+            reply_to=self.cleaned_data["email"],
             subject=self.cleaned_data["subject"],
             html_content=self.cleaned_data["message"],
         )
