@@ -50,10 +50,6 @@ STORAGES = {
     },
 }
 
-# Don't store the original (un-hashed filename) version of static files, to reduce slug size:
-# https://whitenoise.readthedocs.io/en/latest/django.html#WHITENOISE_KEEP_ONLY_HASHED_FILES
-WHITENOISE_KEEP_ONLY_HASHED_FILES = True
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -66,7 +62,6 @@ DEBUG = strtobool(os.environ.get("DEBUG", True))
 ALLOWED_HOSTS = ["ace-blog-723ec9e465ee.herokuapp.com"]
 if DEBUG:
     ALLOWED_HOSTS += ["localhost", "127.0.0.1"]
-
 
 # Application definition
 
@@ -82,14 +77,12 @@ INSTALLED_APPS = [
     "crispy_forms",
     'django_recaptcha',
     'tinymce',
-    'whitenoise.runserver_nostatic',
     # Project Apps
     'apps.blog',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
