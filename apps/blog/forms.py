@@ -33,7 +33,7 @@ def sendgrid_mail(from_email, to_emails, subject, html_content):
 class ContactForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["captcha"].label = False
+        # self.fields["captcha"].label = False
 
     sender = forms.CharField(max_length=256)
     email = forms.EmailField(max_length=256)
@@ -42,7 +42,7 @@ class ContactForm(forms.Form):
         max_length=2000,
         widget=forms.Textarea(attrs=dict(cols=19, rows=10, placeholder="2000 character limit")),
     )
-    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+    # captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
 
     helper = FormHelper()
     helper.add_input(Submit("submit", "Send Email"))
@@ -51,7 +51,7 @@ class ContactForm(forms.Form):
         Field("email"),
         Field("subject"),
         Field("message"),
-        Field('captcha', style="border: none; padding: 0px"),
+        # Field('captcha', style="border: none; padding: 0px"),
     )
 
     def mail(self):
