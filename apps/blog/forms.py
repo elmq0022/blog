@@ -59,7 +59,7 @@ class ContactForm(forms.Form):
         logging.info("form data %s", self.cleaned_data)
         sendgrid_mail(
             from_email=self.cleaned_data["email"],
-            to_emails=getattr(settings, "ENVELOPE_EMAIL_RECIPIENTS", []),
+            to_emails=os.environ.get("ENVELOPE_EMAIL_RECIPIENTS"),
             subject=self.cleaned_data["subject"],
             html_content=self.cleaned_data["message"],
         )
