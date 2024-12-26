@@ -5,6 +5,9 @@ from django.views.generic.edit import FormView
 from apps.blog.models import Article
 from apps.blog.forms import ContactForm
 
+import logging
+logger = logging.getLogger(__file__)
+
 class ArticleDetailView(DetailView):
     model = Article
     template_name = "blog/post.html"
@@ -29,6 +32,8 @@ class ContactView(FormView):
 
     def form_valid(self, form:ContactForm):
         try:
+            logging.info("the form is valid, call form.mail()")
+            logging.info("%s", form)
             form.mail()
             messages.success(self.request, "Your message was sent successfully")
         except Exception:
