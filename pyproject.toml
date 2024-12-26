@@ -26,6 +26,7 @@ dependencies = [
     "django-storages",
     "django-tinymce",
     "gunicorn",
+    "sendgrid",
     "psycopg",
 ]
 

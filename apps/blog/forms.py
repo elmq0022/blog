@@ -1,10 +1,34 @@
+import logging
+import os
+
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Field
 from django import forms
 from django.conf import settings
 from django_recaptcha.fields import ReCaptchaField
 from django_recaptcha.widgets import ReCaptchaV2Checkbox
-from django.core.mail import send_mail
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+
+log = logging.getLogger(__file__)
+
+
+def sendgrid_mail(from_email, to_emails, subject, html_content):
+    message = Mail(
+        from_email=from_email,
+        to_emails=to_emails,
+        subject=subject,
+        html_content=html_content
+    )
+    try:
+        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+        response = sg.send(message)
+        log.info("Sendgrid response status: %s", response.status_code)
+        log.info("SendGrid response body: %s", response.body)
+        log.info("SendGrid response headers: %s", response.headers)
+    except Exception:
+        log.error("email was NOT sent")
+
 
 class ContactForm(forms.Form):
     def __init__(self, *args, **kwargs):
@@ -31,9 +55,11 @@ class ContactForm(forms.Form):
     )
 
     def mail(self):
-        send_mail(
-            subject=self.cleaned_data["subject"],
-            message=self.cleaned_data["message"],
+        log.info("sending email via SendGrid")
+        log.info("form data %s", self.cleaned_data)
+        sendgrid_mail(
             from_email=self.cleaned_data["email"],
-            recipient_list=getattr(settings, "ENVELOPE_EMAIL_RECIPIENTS", [])
+            to_emails=getattr(settings, "ENVELOPE_EMAIL_RECIPIENTS", []),
+            subject=self.cleaned_data["subject"],
+            html_content=self.cleaned_data["message"],
         )
