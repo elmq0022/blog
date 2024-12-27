@@ -59,7 +59,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", 'django-insecure-=0gst^hma!7fas#paq$b@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = strtobool(os.environ.get("DEBUG", True))
 
-ALLOWED_HOSTS = ["ace-blog-723ec9e465ee.herokuapp.com"]
+ALLOWED_HOSTS = ["ace-blog-723ec9e465ee.herokuapp.com", "elmquist.dev"]
 if DEBUG:
     ALLOWED_HOSTS += ["localhost", "127.0.0.1"]
 
