@@ -37,6 +37,5 @@ class ContactView(FormView):
             logging.info("successfully called form.mail()")
             messages.success(self.request, "Your message was sent successfully")
         except Exception:
-            logging.exception("couldn't do it boss")
             messages.error(self.request, "Unable to send your message")
         return super().form_valid(form)

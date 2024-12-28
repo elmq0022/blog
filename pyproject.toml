@@ -27,7 +27,7 @@ dependencies = [
     "django-tinymce",
     "gunicorn",
     "sendgrid",
-    "psycopg",
+    "psycopg2-binary",
 ]
 
 [tool.hatch.build.targets.wheel]

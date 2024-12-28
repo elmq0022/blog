@@ -1,0 +1,35 @@
+services:
+
+  db:
+    image: postgres:17.2-alpine
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=blog
+      - POSTGRES_USER=blog
+  web:
+    depends_on:
+      - db
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app
+    env_file:
+      - docker.env
+    ports:
+      - "8000:8000"
+    entrypoint:
+      - "python"
+      - "manage.py"
+    command:
+      - "runserver"
+      - "0.0.0.0:8000"
+    stdin_open: true
+    tty: true
+
+volumes:
+  pg_data:

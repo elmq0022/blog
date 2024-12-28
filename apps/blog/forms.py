@@ -22,12 +22,13 @@ def sendgrid_mail(from_email, to_emails, reply_to, subject, html_content):
     )
     message.reply_to = reply_to
     try:
-        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+        logging.info(settings.SENDGRID_API_KEY)
+        sg = SendGridAPIClient(settings.SENDGRID_API_KEY)
         response = sg.send(message)
+    except Exception:
         logging.info("Sendgrid response status: %s", response.status_code)
         logging.info("SendGrid response body: %s", response.body)
         logging.info("SendGrid response headers: %s", response.headers)
-    except Exception:
         logging.exception("email was NOT sent")
 
 
@@ -59,8 +60,8 @@ class ContactForm(forms.Form):
         logging.info("sending email via SendGrid")
         logging.info("form data %s", self.cleaned_data)
         sendgrid_mail(
-            from_email=os.environ.get("FROM_EMAIL"),
-            to_emails=os.environ.get("TO_EMAIL"),
+            from_email=settings.FROM_EMAIL,
+            to_emails=settings.TO_EMAIL,
             reply_to=self.cleaned_data["email"],
             subject=self.cleaned_data["subject"],
             html_content=self.cleaned_data["message"],

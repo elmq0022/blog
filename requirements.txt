@@ -43,7 +43,7 @@ jmespath==1.0.1
     #   botocore
 packaging==24.2
     # via gunicorn
-psycopg==3.2.3
+psycopg2-binary==2.9.10
     # via ace_blog (pyproject.toml)
 python-dateutil==2.9.0.post0
     # via botocore
@@ -60,8 +60,6 @@ sqlparse==0.5.3
 starkbank-ecdsa==2.2.0
     # via sendgrid
 typing-extensions==4.12.2
-    # via
-    #   dj-database-url
-    #   psycopg
+    # via dj-database-url
 urllib3==2.3.0
     # via botocore
