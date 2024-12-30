@@ -18,7 +18,7 @@ def strtobool(value: str | bool) -> bool:
 PROJECT_DIR = Path(__file__).resolve().parent
 BASE_DIR = PROJECT_DIR.parent
 SQLITE_DB = str((BASE_DIR / 'db.sqlite3').absolute())
-SITE_ID = 1
+SITE_ID = 2
 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
