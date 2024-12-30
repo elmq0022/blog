@@ -15,10 +15,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('apps/', include('apps.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
+from django.contrib.flatpages import views
 
 urlpatterns = [
     path("", include("apps.blog.urls")),
     path('admin/', admin.site.urls),
+    path("pages/", include("django.contrib.flatpages.urls")),
     path('tinymce/', include('tinymce.urls')),
+]
+
+urlpatterns += [
+    path("about-me/", views.flatpage, {"url": "/about-me/"}, name="about")
 ]
