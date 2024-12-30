@@ -26,5 +26,5 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    path("about-me/", views.flatpage, {"url": "/about-me/"}, name="about")
+    path("about/", views.flatpage, {"url": "/about/"}, name="about")
 ]

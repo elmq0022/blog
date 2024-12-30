@@ -1,4 +1,4 @@
-from django.views.generic import DetailView, ListView, TemplateView
+from django.views.generic import DetailView, ListView
 from django.contrib import messages
 from django.views.generic.edit import FormView
 
@@ -20,9 +20,6 @@ class ArticleListView(ListView):
     ordering = "-published_date"
     queryset = Article.objects.filter(is_published=True)
 
-
-class AboutView(TemplateView):
-    template_name = "blog/about.html"
 
 
 class ContactView(FormView):
