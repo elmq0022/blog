@@ -167,8 +167,19 @@ FROM_EMAIL = os.environ.get("FROM_EMAIL", None)
 # TINYMCE
 ###
 TINYMCE_DEFAULT_CONFIG = {
-    "plugins": "image,codesample",
-    "toolbar": "image,codesample",
+    "theme": "silver",
+    "height": 500,
+    "menubar": True,
+    "plugins":
+        "advlist,autolink,lists,link,image,charmap,print,preview,anchor,"
+        "searchreplace,visualblocks,code,codesample,fullscreen,insertdatetime,media,table,paste,"
+        "code,help,wordcount",
+    "toolbar":
+        "undo redo | formatselect | "
+        "bold italic backcolor | alignleft aligncenter alignright alignjustify | "
+        "image codesample | "
+        " bullist numlist outdent indent | "
+        "removeformat | help",
 }
 TINYMCE_SPELLCHECKER = True
 TINYMCE_COMPRESSOR = False
