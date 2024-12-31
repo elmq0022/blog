@@ -24,7 +24,7 @@ admin.site.register(Article, ArticleAdmin)
 class FlatPageForm(forms.ModelForm):
     class Meta:
         model = FlatPage
-        widgets = {'content': TinyMCE(attrs={'cols': 160, 'rows': 30})}
+        widgets = {'content': TinyMCE()}
         exclude = []
 
 
