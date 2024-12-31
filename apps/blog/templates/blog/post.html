@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block page_title %} POST {% endblock %}
-{% block page_subtitle %} ARTICLE {% endblock %}
+{% block page_title %} {{ article.title }} {% endblock %}
+{% block page_subtitle %} {{ article.subtitle }} {% endblock %}
 {% block page_image %}{% static 'assets/img/post-bg.jpg' %}{% endblock %}
 
 {% block content %}
