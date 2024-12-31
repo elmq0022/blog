@@ -9,3 +9,6 @@ class Article(models.Model):
     content = models.TextField()
     published_date = models.DateField()
     is_published = models.BooleanField(default=False, blank=False)
+
+    def __str__(self):
+        return f"{self.title}: {self.subtitle} by {self.author}"
