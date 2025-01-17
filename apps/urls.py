@@ -16,15 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path, re_path
-from django.contrib.flatpages import views
 
 urlpatterns = [
     path("", include("apps.blog.urls")),
     path('admin/', admin.site.urls),
     path("pages/", include("django.contrib.flatpages.urls")),
     path('tinymce/', include('tinymce.urls')),
-]
-
-urlpatterns += [
-    path("about/", views.flatpage, {"url": "/about/"}, name="about")
+    path('', include('django.contrib.flatpages.urls')),  # Flatpages without '/pages' prefix
 ]
