@@ -25,7 +25,7 @@ class ArticleListView(ListView):
 class ContactView(FormView):
     template_name = "blog/contact.html"
     form_class = ContactForm
-    success_url = "/contact"
+    success_url = "/contact/"
 
     def form_valid(self, form:ContactForm):
         try:
